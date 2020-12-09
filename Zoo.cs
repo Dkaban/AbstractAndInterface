@@ -9,6 +9,7 @@ namespace CSharpPractice
         public static void Main(string[] args)
         {
             Cat cat = new Cat("Cheddar", 30);
+            
             Console.WriteLine("Cat Name: " + cat.name);
             Console.WriteLine("Cat Age : " + cat.age);
             Console.WriteLine("Cat Jump Distance: " + cat.GetJumpDistance());
