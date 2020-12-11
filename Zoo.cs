@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
 namespace CSharpPractice
 {
@@ -8,13 +6,34 @@ namespace CSharpPractice
     {
         public static void Main(string[] args)
         {
-            Cat cat = new Cat("Cheddar", 30);
-            
-            Console.WriteLine("Cat Name: " + cat.name);
-            Console.WriteLine("Cat Age : " + cat.age);
-            Console.WriteLine("Cat Jump Distance: " + cat.GetJumpDistance());
-            Console.WriteLine("Cat Attack Power: " + cat.AttackPower);
-            Console.WriteLine("Cat Climate: " + cat.ClimateValue);
+            Cat cat = new Cat("bum", 30);
+            Console.WriteLine("Cat Name: " + cat.name + "\n" + "Cat Age: " + cat.age + "\n" + "Cat Jump Distance: " + cat.GetJumpDistance()
+                 + "\n" + "Cat Attack Power: " + cat.AttackPower + "\n" + "Cat Climate: " + cat.ClimateValue);
+
+            Employee employee = new Employee
+            {
+                Name = "Dustin",
+                OnVacation = false
+            };
+
+            //Example of how ref works
+            Console.WriteLine("Before ref: Employee Name: " + employee.Name + "\n" + "Employee On Vacation? " + employee.OnVacation);
+
+            EmployeeGoOnVacation(ref employee);
+
+            Console.WriteLine("After ref: Employee Name: " + employee.Name + "\n" + "Employee On Vacation? " + employee.OnVacation);
         }
+
+        static void EmployeeGoOnVacation(ref Employee employee)
+        {
+            employee.OnVacation = true;
+            employee.Name = "Nitsud";
+        }
+    }
+
+    class Employee
+    {
+        public string Name { get; set; }
+        public bool OnVacation { get; set; }
     }
 }
