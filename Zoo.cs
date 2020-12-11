@@ -10,63 +10,52 @@ namespace CSharpPractice
             Console.WriteLine("Cat Name: " + cat.name + "\n" + "Cat Age: " + cat.age + "\n" + "Cat Jump Distance: " + cat.GetJumpDistance()
                  + "\n" + "Cat Attack Power: " + cat.AttackPower + "\n" + "Cat Climate: " + cat.ClimateValue);
 
-            //Example to showcase how ref functionality works
-            Employee refEmployee = new Employee
+            Employee employee = new Employee
             {
                 Name = "Dustin",
                 OnVacation = false
             };
 
-            Console.WriteLine("Before ref: Employee Name: " + refEmployee.Name + "\n" + "Employee On Vacation? " + refEmployee.OnVacation);
-            EmployeeRefOnVacation(ref refEmployee);
-            Console.WriteLine("After ref: Employee Name: " + refEmployee.Name + "\n" + "Employee On Vacation? " + refEmployee.OnVacation);
+            DisplayResultToUser("Initial values: ", employee);
 
-            //Example to showcase how out functionality works
-            Employee outEmployee = new Employee
-            {
-                Name = "OutDustin",
-                OnVacation = false
-            };
-            Console.WriteLine("Before out: Employee Name: " + outEmployee.Name + "\n" + "Employee On Vacation ? " + outEmployee.OnVacation);
-            EmployeeOutOnVacation(out outEmployee);
-            Console.WriteLine("After out: Employee Name: " + outEmployee.Name + "\n" + "Employee On Vacation ? " + outEmployee.OnVacation);
+            //Show what Ref is doing to the employee object
+            RefExample(ref employee);
+            DisplayResultToUser("after ref: ", employee);
 
-            //Example to showcase how in functionality works
-            Employee inEmployee = new Employee
-            {
-                Name = "OutDustin",
-                OnVacation = false
-            };
-            Console.WriteLine("Before out: Employee Name: " + inEmployee.Name + "\n" + "Employee On Vacation ? " + inEmployee.OnVacation);
-            EmployeeInOnVacation(in inEmployee);
-            Console.WriteLine("After out: Employee Name: " + inEmployee.Name + "\n" + "Employee On Vacation ? " + inEmployee.OnVacation);
+            //Show what Out is doing to the employee object
+            OutExample(out employee);
+            DisplayResultToUser("after out: ", employee);
+
+            //Show what In is doing to the employee object
+            InExample(in employee);
+            DisplayResultToUser("after in: ", employee);
         }
 
-        static void EmployeeRefOnVacation(ref Employee employee)
+        static void DisplayResultToUser(String prefix, Employee employee)
+        {
+            Console.WriteLine(prefix + ": Employee Name: " + employee.Name + "\n" + "Employee On Vacation? " + employee.OnVacation);
+        }
+
+        static void RefExample(ref Employee employee)
         {
             //Changes will alter variable outside the method
             employee.OnVacation = true;
             employee.Name = "Nitsud";
         }
 
-        static void EmployeeOutOnVacation(out Employee employee)
+        static void OutExample(out Employee employee)
         {
             //Must Initialize the parameter when using out
             employee = new Employee();
-            employee.OnVacation = true;
+            //Name will be empty as we never initialized it
+            employee.OnVacation = false;
         }
 
-        static void EmployeeInOnVacation(in Employee employee)
+        static void InExample(in Employee employee)
         {
             //New would throw an Error if used inside an in
             //employee = new Employee();
             employee.Name = "Banana";
         }
-    }
-
-    class Employee
-    {
-        public string Name { get; set; }
-        public bool OnVacation { get; set; }
     }
 }
